@@ -55,7 +55,8 @@ jobs:
         id: push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ${{ matrix.directory }}
+          file: ${{ matrix.directory }}/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -64,8 +65,6 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          context: ${{ matrix.directory }}
-          file: ${{ matrix.directory }}/Dockerfile
           subject-name: ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.directory }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
