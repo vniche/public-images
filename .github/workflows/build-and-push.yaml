@@ -8,6 +8,7 @@ on:
       - main
     paths:
       - 'basic-memory/**'
+      - 'pi-coding-agent/**'
       - '.github/workflows/build-and-push.yaml'
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
@@ -22,6 +23,7 @@ jobs:
       matrix:
         directory:
           - basic-memory
+          - pi-coding-agent
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read
